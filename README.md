@@ -208,14 +208,12 @@ First activate conda:
 
 ``` 
 conda install -c bioconda gblocks
-
 ``` 
 
 Try to see if the Gblock is working by typing 
 
 ``` 
 Gblocks
-
 ``` 
 
 Alternatively you can download the software through its own website at http://molevol.cmima.csic.es/castresana/Gblocks.html
@@ -224,7 +222,7 @@ Alternatively you can download the software through its own website at http://mo
 ### #Data analyses
 
 #### 1) SECAPR data analyses overview
-SECAPR is a pipeline written in phyton by Tobias Andermann. It comprises a number of setps tha can drive you from the raw sequencing data until the multiple sequencing alignment. It also has a number of data visualization codes where you can decided if you need to re-adjust your parameters or go forward.
+SECAPR is a pipeline written in phyton by Tobias Andermann. It comprises a number of steps tha can drive you from the raw sequencing data to multiple sequencing alignment. It also has a number of data visualization codes where you can decided if you need to re-adjust your parameters or go forward.
 
 ![image](https://user-images.githubusercontent.com/88035938/130038396-5e2cceed-edce-4e03-a400-4735c33c8795.png)
 
@@ -274,7 +272,6 @@ We mapped our contigs using the following commands:
 secapr find_target_contigs --contigs /storage/plzen1/home/paolaferreira/3.assembling  --output /storage/plzen1/home/paolaferreira/4.mapping --reference /storage/plzen1/home/paolaferreira/0.reference 
 ``` 
 
-
 #### 4) Alignment
 Now we have our selected contigs which were mapped against the RADseq references and we need to perform a Multiple Sequence Alignments (MSAs) using mafft or muscle. This function builds a separate alignment for each locus with matching contigs for ≥3 samples.
 
@@ -282,7 +279,25 @@ Now we have our selected contigs which were mapped against the RADseq references
 secapr align_sequences --sequences /storage/brno3-cerit/home/paolaferreira/2.de_novo_assembly/12.Test_reference_based_secapr/4.joined_fasta/combined_joined_unphased_fastas.fasta --output /storage/brno3-cerit/home/paolaferreira/2.de_novo_assembly/12.Test_reference_based_secapr/5.Alignment --aligner mafft --output-format fasta --no-trim --cores 12
 ``` 
 
-SECAPR has a lot of other parameters to include in the analyses. If you wanna try it out more
+#### 5) Trimming
+Once we get our multiple sequence alignments usually we need to remove poor aligned and divergent regions that may not be homologous or satured by multiple substitutions.
+
+Go to the folder where your aligments are and create a loop in bash using default parameters:
+
+``` 
+for i in *fasta; do Gblocks ${i} -t=y -p=y; done
+``` 
+
+This step is going to create two outputs:
+your_file_alignment.fasta-gb - This file is our trimmed multiple sequence alignment 
+your_file_alignment.fasta-gb.htm - This file comprises the trimming statistics for each alignment.
+
+
+#### 6) Consensus alignment
+Our multiple sequence alignments are now cleaned and we will be using those to create a new set of reference targets. 
+Once we get our multiple sequence alignments usually we need to remove poor aligned and divergent regions that may not be homologous or satured by multiple substitutions.
+alignment.
+
 
 
 #### References:
