@@ -71,10 +71,14 @@ MYS5_R2.fq.gz
 ``` 
 
 ### #Installation and Setup
+
+For this project we need to install the pipeline (SECAPR; Andermann et al. 2018) and an additional program for trimming the alignments (Gblocks; Castresana, 2002) 
+
+#### 1. Installing SECAPR pipeline
 In our willow's project we used the pipeline entitled Sequence Capture Processor (hereafter SECAPR; Andermann et al. 2018). Please notice that the installation and setup here is just a copy of the original SECAPR repository on github. The complete documentation and installation files can be found at: http://antonellilab.github.io/seqcap_processor/ 
 
 
-#### 1. Install conda
+#### 1.1. Install conda
 
 Download the Python2.7 version of Miniconda and install it by executing the downloaded sh-file (see commands below).
 
@@ -108,7 +112,7 @@ Add Bioconda channels (containing bioinformatics software):
 conda config --add channels defaults; conda config --add channels conda-forge; conda config --add channels bioconda; conda config --add channels https://conda.anaconda.org/faircloth-lab 
 ``` 
 
-#### 2. Install the SECAPR environment
+#### 1.2. Install the SECAPR environment
 
 Conda automatically downloads and installs all necessary software dependencies. We strongly recommend to install SECAPR and all it's dependencies in a separate virtual environment, in order to not interfer with potentially already installed verisons of the software dependencies.
 
@@ -119,7 +123,7 @@ sh install_secapr_env.sh
 ``` 
 
 
-#### 3. Activate the environment
+#### 1.3. Activate the environment
 
 To activate the newly created environment, type:
 
@@ -139,7 +143,7 @@ When the environment is activated, all the necessary software dependencies will 
 source deactivate
 ``` 
 
-#### 4. Check active environment
+#### 1.4. Check active environment
 
 Check if you are connected to the correct environment (there should eb a star in front of secapr_env in the output of this command):
 
@@ -148,7 +152,7 @@ Check active environment:
 conda info --envs 
 ``` 
 
-#### 5. Install SECAPR development version
+#### 1.5. Install SECAPR development version
 For the purpose of this project, we are using the SECAPR version 2.0.2. Therefore we need to install the version by following the instructions below:
 
 Connect to your secapr environment 
@@ -194,6 +198,10 @@ Check the version installed
 ``` 
 secapr --version
 ``` 
+
+#### 2. Install Gblocks
+Gblocks is a software that eliminates poorly aligned positions and divergent regions of an alignment of DNA or protein sequences (Castresana, 2000; Talavera & Castresana, 2007)
+
 
 ### #Data analyses
 
@@ -261,6 +269,10 @@ SECAPR has a lot of other parameters to include in the analyses. If you wanna tr
 
 #### References:
 Andermann, T., Cano, Á., Zizka, A., Bacon, C., & Antonelli, A. (2018). SECAPR-a bioinformatics pipeline for the rapid and user-friendly processing of targeted enriched Illumina sequences, from raw reads to alignments. PeerJ, 6, e5175. https://doi.org/10.7717/peerj.5175
+
+Castresana, J. (2000). Selection of conserved blocks from multiple alignments for their use in phylogenetic analysis. Molecular Biology and Evolution 17, 540-552. https://doi.org/10.1093/oxfordjournals.molbev.a026334 
+
+Talavera, G., and Castresana, J. (2007). Improvement of phylogenies after removing divergent and ambiguously aligned blocks from protein sequence alignments. Systematic Biology 56, 564-577. https://doi.org/10.1080/10635150701472164
 
 Wagner, N. D., He, L., & Hörandl, E. (2020). Phylogenomic Relationships and Evolution of Polyploid Salix Species Revealed by RAD Sequencing Data. Frontiers in plant science, 11, 1077. https://doi.org/10.3389/fpls.2020.01077 
 
