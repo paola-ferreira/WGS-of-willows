@@ -17,10 +17,15 @@ The file generate here is will be used as the target.
 #### 1) Importing data
 Go to the folder comprising all the raw data reads generated from the last step and upload all of them to the metacentrum cluster:
 
-``` scp * paolaferreira@nympha.zcu.cz:/storage/plzen1/home/paolaferreira/1.raw_data```
+``` 
+scp * paolaferreira@nympha.zcu.cz:/storage/plzen1/home/paolaferreira/1.raw_data
+```
 
-You should also upload the fasta file reference in a new folder
-``` scp reference.fasta paolaferreira@nympha.zcu.cz:/storage/plzen1/home/paolaferreira/0.reference```
+You should also upload the fasta file reference in a new folder:
+
+``` 
+scp reference.fasta paolaferreira@nympha.zcu.cz:/storage/plzen1/home/paolaferreira/0.reference
+```
 
 #### 2) Check how many reads we have in every file. 
 Note our willow data is paired end, which means we sequenced sequence both ends of a fragment and generate high-quality, alignable sequence data. Therefore for every sample we have SampleA_R1.fq.gz SampleA_R2.fq.gz and they must have the same amount of reads. (Read more about Illumina Paired-End Sequencing at https://www.illumina.com/science/technology/next-generation-sequencing/plan-experiments/paired-end-vs-single-read.html)
@@ -276,7 +281,7 @@ secapr find_target_contigs --contigs /storage/plzen1/home/paolaferreira/3.assemb
 Now we have our selected contigs which were mapped against the RADseq references and we need to perform a Multiple Sequence Alignments (MSAs) using mafft or muscle. This function builds a separate alignment for each locus with matching contigs for ≥3 samples.
 
 ``` 
-secapr align_sequences --sequences /storage/brno3-cerit/home/paolaferreira/2.de_novo_assembly/12.Test_reference_based_secapr/4.joined_fasta/combined_joined_unphased_fastas.fasta --output /storage/brno3-cerit/home/paolaferreira/2.de_novo_assembly/12.Test_reference_based_secapr/5.Alignment --aligner mafft --output-format fasta --no-trim --cores 12
+secapr align_sequences --sequences /storage/plzen1/home/paolaferreira/4.mapping/combined_joined_unphased_fastas.fasta --output /storage/plzen1/home/paolaferreira/4.mapping/5.Alignment --aligner mafft --output-format fasta --no-trim --cores 12
 ``` 
 
 #### 5) Trimming
@@ -292,11 +297,24 @@ This step is going to create two outputs:
 your_file_alignment.fasta-gb - This file is our trimmed multiple sequence alignment 
 your_file_alignment.fasta-gb.htm - This file comprises the trimming statistics for each alignment.
 
+Let's create a new folder and move the cleaned alignments:
 
-#### 6) Consensus alignment
-Our multiple sequence alignments are now cleaned and we will be using those to create a new set of reference targets. 
-Once we get our multiple sequence alignments usually we need to remove poor aligned and divergent regions that may not be homologous or satured by multiple substitutions.
-alignment.
+``` 
+paolaferreira@skirit:/storage/plzen1/home/paolaferreira$ mkdir 6.cleaned_alignments
+mv *gb ../6.cleaned_alignments
+``` 
+
+#### 7) Mapping
+Usually an analysis of most NGS datasets comprises the previous steps that we have gone through (cleaning and trimming of the reads, de-novo assembly of contigs, mapping, multiple sequence alignments and trimming). Now we will use those mutiple sequence alignments in order to generate new reference libraries and assemble the clean reads:
+
+``` 
+secapr reference_assembly --reads /storage/plzen1/home/paolaferreira/1.raw_data --reference_type alignment-consensus --reference /storage/plzen1/home/paolaferreira/6.cleaned_alignments --output /storage/plzen1/home/paolaferreira/8.reference_based_mapping --cores 16 --min_coverage 4
+``` 
+
+
+
+
+
 
 
 
