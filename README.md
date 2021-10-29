@@ -37,7 +37,7 @@ ACU2_2.fq.gz
 
 Lastly, save all the information of the number of reads because this is usually reported in the supplementary materials of any NGS publication.
 
-#### 3) Merge raw reads data.
+#### 3) Merge raw reads data
 In order to increase the depth coverage of your samples, we have sequenced S. glaucosericea (GSR7), S. lapponum (LAP1), S. mielichhoferi (MIE5), S. myrsinifolia (MYS5) twice. Before proceeding with the further analyses, let's merge the sequences. For example, in S. myrsinifolia you will see four reads (two in every sequencing)
 ``` 
 MYS5_1.fq.gz
@@ -200,7 +200,7 @@ secapr --version
 ``` 
 
 #### 2. Install Gblocks
-Gblocks is a software that eliminates poorly aligned positions and divergent regions of an alignment of DNA or protein sequences (Castresana, 2000; Talavera & Castresana, 2007)
+Gblocks is a software that eliminates poorly aligned positions and divergent regions of an alignment of DNA or protein sequences (Castresana, 2000; Talavera & Castresana, 2007).
 
 
 ### #Data analyses
