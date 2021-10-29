@@ -164,27 +164,33 @@ pip uninstall secapr
 ```
 
 Download the version 2.0.2 (Source code.zip) from github 
+
 ``` 
 wget https://github.com/AntonelliLab/seqcap_processor/releases/tag/v2.0.2
 ```
 
 Unzip the downloaded file 
+
 ``` 
-seqcap_processor-2.0.2.zip
+unzip seqcap_processor-2.0.2.zip
 ``` 
 
 Move the unzipped directory to a safe location on your computer (in our case to the metacentrum cluster), i.e. not on your Desktop or Download folder, since this will be the path where secapr will be executed from in the future
 
 Enter the unzipped secapr directory 
+
 ``` 
 cd seqcap_processor-2.0.2
 ``` 
 
 Install secapr from the folder 
-``` python -m pip install -e .
+
+``` 
+python -m pip install -e .
 ``` 
 
 Check the version installed 
+
 ``` 
 secapr --version
 ``` 
