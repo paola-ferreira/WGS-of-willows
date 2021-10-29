@@ -202,6 +202,24 @@ secapr --version
 #### 2. Install Gblocks
 Gblocks is a software that eliminates poorly aligned positions and divergent regions of an alignment of DNA or protein sequences (Castresana, 2000; Talavera & Castresana, 2007).
 
+For this project we are using Gblocks version 0.91. You can download this version through conda.
+
+First activate conda:
+
+``` 
+conda install -c bioconda gblocks
+
+``` 
+
+Try to see if the Gblock is working by typing 
+
+``` 
+Gblocks
+
+``` 
+
+Alternatively you can download the software through its own website at http://molevol.cmima.csic.es/castresana/Gblocks.html
+
 
 ### #Data analyses
 
