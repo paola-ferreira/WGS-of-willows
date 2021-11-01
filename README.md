@@ -239,10 +239,15 @@ First unzip our .fastqc files using the gunzip program:
 gunzip *
 ``` 
 
-Second rename your files: A simple sample ID is enough followed by _R1 for the forward reads and _R2 for the backward reads
+Second rename your files: A simple sample ID is enough followed by _R1 for the forward reads and _R2 for the backward reads.
 
 
 #### #Data Analysis 
+Our pipeline comprises two main approaches. First, the clean reads were de novo assembled into contigs and mapped against the alignment consensus of 23,393 loci from Wagner et al. (2020). Target-enriched loci were aligned, trimmed and submmited to a new alignment consensus. Second, the alignment consensus was mapped against the clean reads. Multiple sequence alignments for each loci was performed including 4 or more taxa and large than 500 base pairs, and trimming unambiguous aligned regions. The resulting matrices used in downstream phylogenetic analyses using concatenation (IQtree), and coalescent approach (ASTRAL-III).
+
+
+Supplementary Figure 1. Phylogenomics workflow.
+
 #### 1) Quality Check your raw reads
 In our case, the sequencing company was responsible for removing the adapters and do a quality control of the reads. However, most of the time you will receive the raw data. To convince yourself that the data is in a good quality, let's double check our reads:
 
@@ -250,8 +255,8 @@ In our case, the sequencing company was responsible for removing the adapters an
 secapr quality_check --input /storage/plzen1/home/paolaferreira/1.raw_data --output /storage/plzen1/home/paolaferreira/2.Checking_quality_raw_data
 ``` 
 
-- SECAPR will produce two plots using the R-script to show summary statistics for each individual test. The test names carry 3-letter acronyms, and the corresponding full test-name can be found by opening one of the html files. The first plot shows how many occurrences of each test-result (fail,pass,warn) were found for each test among all samples (per-test basis). The second plot shows for each sample (y-axis) which test had which result (per-sample basis).
 - If you are satisfyed with the quality of your reads, you should go for the next step. 
+
 
 #### 2) Assembling contigs
 After checking the quality (and/or cleaning and trimming the reads) we are now ready to use the fastq-reads for de-novo contig assembly. In this step the overlap between fastq reads is being used to build long, uninterrupted sequences, with no a priori knowledge of the correct sequence or order of those fragments. We will use the contigs to hopefully find the target regions that were selected for during sequence capture.
