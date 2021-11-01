@@ -82,6 +82,13 @@ For this project we need to install the pipeline (SECAPR; Andermann et al. 2018)
 #### 1. Installing SECAPR pipeline
 In our willow's project we used the pipeline entitled Sequence Capture Processor (hereafter SECAPR; Andermann et al. 2018). Please notice that the installation and setup here is just a copy of the original SECAPR repository on github. The complete documentation and installation files can be found at: http://antonellilab.github.io/seqcap_processor/ 
 
+#### SECAPR data analyses overview
+SECAPR is a pipeline written in phyton by Tobias Andermann. It comprises a number of steps tha can drive you from the raw sequencing data to multiple sequencing alignment. It also has a number of data visualization codes where you can decided if you need to re-adjust your parameters or go forward.
+
+![image](https://user-images.githubusercontent.com/88035938/130038396-5e2cceed-edce-4e03-a400-4735c33c8795.png)
+
+SECAPR analytical workflow. The flowchart shows the basic SECAPR functions, which are separated into two separate steps (colored boxes). Blue box (1. reference library from raw data): in this step the raw reads are cleaned and assembled into contigs (de novo assembly); Orange box (2. reference based assembly with custom reference library): the contigs from the previous step are used for reference-based assembly, enabling allele phasing and additional quality control options, e.g. concerning read-coverage. Black boxes show SECAPR commands and white boxes represent the input and output data of the respective function. Boxes marked in grey represent multiple sequence alignments (MSAs) generated with SECAPR, which can be used for phylogenetic inference. **Extracted from SECAPR Github.
+
 
 #### 1.1. Install conda
 
@@ -226,12 +233,7 @@ Alternatively you can download the software through its own website at http://mo
 
 ### #Data analyses
 
-#### 1) SECAPR data analyses overview
-SECAPR is a pipeline written in phyton by Tobias Andermann. It comprises a number of steps tha can drive you from the raw sequencing data to multiple sequencing alignment. It also has a number of data visualization codes where you can decided if you need to re-adjust your parameters or go forward.
 
-![image](https://user-images.githubusercontent.com/88035938/130038396-5e2cceed-edce-4e03-a400-4735c33c8795.png)
-
-SECAPR analytical workflow. The flowchart shows the basic SECAPR functions, which are separated into two separate steps (colored boxes). Blue box (1. reference library from raw data): in this step the raw reads are cleaned and assembled into contigs (de novo assembly); Orange box (2. reference based assembly with custom reference library): the contigs from the previous step are used for reference-based assembly, enabling allele phasing and additional quality control options, e.g. concerning read-coverage. Black boxes show SECAPR commands and white boxes represent the input and output data of the respective function. Boxes marked in grey represent multiple sequence alignments (MSAs) generated with SECAPR, which can be used for phylogenetic inference. **Extracted from SECAPR Github.
 
 
 #### 1) Rename and unzip your files
