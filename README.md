@@ -233,7 +233,7 @@ MYS5_R2.fq.gz
 
 #### 4) Rename and unzip your files
 Since we are going to use the SECAPR pipeline, we need to have our files in a way that the pipeline will be able to recognize it.
-First unzip our .fastqc files using the gunzip program:
+First unzip our .fastq files using the gunzip program:
 
 ``` 
 gunzip *
