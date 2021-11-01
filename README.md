@@ -2,79 +2,6 @@
 This is a step-by-step tutorial how it was analyzed the WGS data of willows from Illumina sequencing. Please notice that all analyses must be run in a cluster due to the amount of data generated.
 This tutorial is supposed to be friendly-user but I will be delight to answer any questions.
 
-### #Before you start
-We used our Whole-genome sequencing data in order to propose a evolutionary hypothesis for the enigmatic genus Salix. To do this, we used the alignments from Wagner et al. 2020 as targets in our dataset. The wagner's dataset comprised 23,393 loci for 133 taxa.
-
-1) Download the DNA matrices and import in Geneious
-2) Select all alignments and create a consensus for every aligment by clicking on 
-``` Tools -> Generate Sequencing Consensus ```
-4) Export all the consensus sequences (fasta format) to a folder in your computer
-5) Open the folder in a terminal and join all the consensus sequences into a single file 
-``` cat * > reference.fasta ```
-
-The file generate here is will be used as the target.
-
-#### 1) Importing data
-Go to the folder comprising all the raw data reads generated from the last step and upload all of them to the metacentrum cluster:
-
-``` 
-scp * paolaferreira@nympha.zcu.cz:/storage/plzen1/home/paolaferreira/1.raw_data
-```
-
-You should also upload the fasta file reference in a new folder:
-
-``` 
-scp reference.fasta paolaferreira@nympha.zcu.cz:/storage/plzen1/home/paolaferreira/0.reference
-```
-
-#### 2) Check how many reads we have in every file. 
-Note our willow data is paired end, which means we sequenced sequence both ends of a fragment and generate high-quality, alignable sequence data. Therefore for every sample we have SampleA_R1.fq.gz SampleA_R2.fq.gz and they must have the same amount of reads. (Read more about Illumina Paired-End Sequencing at https://www.illumina.com/science/technology/next-generation-sequencing/plan-experiments/paired-end-vs-single-read.html)
-
-``` for i in *.fq.gz; do echo $i; gunzip -c $i | wc -l | awk '{print $1/4}'; done```
-
-The results should look like this:
-``` 
-ACU2_1.fq.gz
-48960515
-ACU2_2.fq.gz
-48960515
-```
-
-Lastly, save all the information of the number of reads because this is usually reported in the supplementary materials of any NGS publication.
-
-#### 3) Merge raw reads data
-In order to increase the depth coverage of your samples, we have sequenced S. glaucosericea (GSR7), S. lapponum (LAP1), S. mielichhoferi (MIE5), S. myrsinifolia (MYS5) twice. Before proceeding with the further analyses, let's merge the sequences. For example, in S. myrsinifolia you will see four reads (two in every sequencing)
-``` 
-MYS5_1.fq.gz
-46385628
-MYS5_2_1.fq.gz
-39397922
-MYS5_2_2.fq.gz
-39397922
-MYS5_2.fq.gz
-46385628
-``` 
-Merge the files MYS5_1.fq.gz and MYS5_2_1.fq.gz which represents both R1 sequencing:
-
-``` cat  MYS5_1.fq.gz MYS5_2_1.fq.gz > MYS5_R1.fq.gz ``` 
-
-Do the same with the R2
-
-``` cat  MYS5_2.fq.gz MYS5_2_2.fq.gz > MYS5_R2.fq.gz ``` 
-
-Check if the merging was performed correctly by checking the number of reads. 
-
-``` for i in MYS5*.fq.gz; do echo $i; gunzip -c $i | wc -l | awk '{print $1/4}'; done```
-
-The results should be the sum of both reads:
-
-``` 
-MYS5_R1.fq.gz
-85783550
-MYS5_R2.fq.gz
-85783550
-``` 
-
 ### #Installation and Setup
 
 For this project we need to install the pipeline (SECAPR; Andermann et al. 2018) and an additional program for trimming the alignments (Gblocks; Castresana, 2002) 
@@ -231,12 +158,80 @@ Gblocks
 Alternatively you can download the software through its own website at http://molevol.cmima.csic.es/castresana/Gblocks.html
 
 
-### #Data analyses
+### #Before you start
+We used our Whole-genome sequencing data in order to propose a evolutionary hypothesis for the enigmatic genus Salix. To do this, we used the alignments from Wagner et al. 2020 as targets in our dataset. The wagner's dataset comprised 23,393 loci for 133 taxa.
 
+1) Download the DNA matrices and import in Geneious
+2) Select all alignments and create a consensus for every aligment by clicking on 
+``` Tools -> Generate Sequencing Consensus ```
+4) Export all the consensus sequences (fasta format) to a folder in your computer
+5) Open the folder in a terminal and join all the consensus sequences into a single file 
+``` cat * > reference.fasta ```
 
+The file generate here is will be used as the target.
 
+#### 1) Importing data
+Go to the folder comprising all the raw data reads generated from the last step and upload all of them to the metacentrum cluster:
 
-#### 1) Rename and unzip your files
+``` 
+scp * paolaferreira@nympha.zcu.cz:/storage/plzen1/home/paolaferreira/1.raw_data
+```
+
+You should also upload the fasta file reference in a new folder:
+
+``` 
+scp reference.fasta paolaferreira@nympha.zcu.cz:/storage/plzen1/home/paolaferreira/0.reference
+```
+
+#### 2) Check how many reads we have in every file. 
+Note our willow data is paired end, which means we sequenced sequence both ends of a fragment and generate high-quality, alignable sequence data. Therefore for every sample we have SampleA_R1.fq.gz SampleA_R2.fq.gz and they must have the same amount of reads. (Read more about Illumina Paired-End Sequencing at https://www.illumina.com/science/technology/next-generation-sequencing/plan-experiments/paired-end-vs-single-read.html)
+
+``` for i in *.fq.gz; do echo $i; gunzip -c $i | wc -l | awk '{print $1/4}'; done```
+
+The results should look like this:
+``` 
+ACU2_1.fq.gz
+48960515
+ACU2_2.fq.gz
+48960515
+```
+
+Lastly, save all the information of the number of reads because this is usually reported in the supplementary materials of any NGS publication.
+
+#### 3) Merge raw reads data
+In order to increase the depth coverage of your samples, we have sequenced S. glaucosericea (GSR7), S. lapponum (LAP1), S. mielichhoferi (MIE5), S. myrsinifolia (MYS5) twice. Before proceeding with the further analyses, let's merge the sequences. For example, in S. myrsinifolia you will see four reads (two in every sequencing)
+``` 
+MYS5_1.fq.gz
+46385628
+MYS5_2_1.fq.gz
+39397922
+MYS5_2_2.fq.gz
+39397922
+MYS5_2.fq.gz
+46385628
+``` 
+Merge the files MYS5_1.fq.gz and MYS5_2_1.fq.gz which represents both R1 sequencing:
+
+``` cat  MYS5_1.fq.gz MYS5_2_1.fq.gz > MYS5_R1.fq.gz ``` 
+
+Do the same with the R2
+
+``` cat  MYS5_2.fq.gz MYS5_2_2.fq.gz > MYS5_R2.fq.gz ``` 
+
+Check if the merging was performed correctly by checking the number of reads. 
+
+``` for i in MYS5*.fq.gz; do echo $i; gunzip -c $i | wc -l | awk '{print $1/4}'; done```
+
+The results should be the sum of both reads:
+
+``` 
+MYS5_R1.fq.gz
+85783550
+MYS5_R2.fq.gz
+85783550
+``` 
+
+#### 4) Rename and unzip your files
 Since we are going to use the SECAPR pipeline, we need to have our files in a way that the pipeline will be able to recognize it.
 First unzip our .fastqc files using the gunzip program:
 
@@ -247,7 +242,8 @@ gunzip *
 Second rename your files: A simple sample ID is enough followed by _R1 for the forward reads and _R2 for the backward reads
 
 
-#### 2) Quality Check your raw reads
+#### #Data Analysis 
+#### 1) Quality Check your raw reads
 In our case, the sequencing company was responsible for removing the adapters and do a quality control of the reads. However, most of the time you will receive the raw data. To convince yourself that the data is in a good quality, let's double check our reads:
 
 ``` 
@@ -257,7 +253,7 @@ secapr quality_check --input /storage/plzen1/home/paolaferreira/1.raw_data --out
 - SECAPR will produce two plots using the R-script to show summary statistics for each individual test. The test names carry 3-letter acronyms, and the corresponding full test-name can be found by opening one of the html files. The first plot shows how many occurrences of each test-result (fail,pass,warn) were found for each test among all samples (per-test basis). The second plot shows for each sample (y-axis) which test had which result (per-sample basis).
 - If you are satisfyed with the quality of your reads, you should go for the next step. 
 
-#### 3) Assembling contigs
+#### 2) Assembling contigs
 After checking the quality (and/or cleaning and trimming the reads) we are now ready to use the fastq-reads for de-novo contig assembly. In this step the overlap between fastq reads is being used to build long, uninterrupted sequences, with no a priori knowledge of the correct sequence or order of those fragments. We will use the contigs to hopefully find the target regions that were selected for during sequence capture.
 For our willows project we used the development version of SECAPR which includes the ABYSS assembler. This is a much faster program compared to ABySS and Trinity (mostly used for transcriptome analysis) and also allows you to test several k-mer sizes at once. But first create a folder for each sample follow by ____clean___  and transfer both fastaq to there. This is necessary since we skipped the cleaning step, otherwise SECAPR would create a folder like that to you.
 We ran our assemble using: 
@@ -266,7 +262,7 @@ We ran our assemble using:
 secapr assemble_reads --input /storage/plzen1/home/paolaferreira/1.raw_data  --output /storage/plzen1/home/paolaferreira/3.assembling --assembler spades --kmer 21,33,55,77,99,127 --contig_length 50 --cores 16
 ``` 
 
-#### 4) Mapping
+#### 3) Mapping
 Mapping is the process to align contigs (or reads) obtained by through high-throughput genome sequencing to a reference (genome, genes, cds, etc). To do this we will be using the consensus sequence from the multiple sequence alignment uploaded in the __before you start section.  
 
 ![image](https://user-images.githubusercontent.com/88035938/130071327-a8ebf5eb-8239-4309-b9cd-6277f53caf98.png)
@@ -306,7 +302,7 @@ paolaferreira@skirit:/storage/plzen1/home/paolaferreira$ mkdir 6.cleaned_alignme
 mv *gb ../6.cleaned_alignments
 ``` 
 
-#### 7) Mapping
+#### 6) Mapping
 Usually an analysis of most NGS datasets comprises the previous steps that we have gone through (cleaning and trimming of the reads, de-novo assembly of contigs, mapping, multiple sequence alignments and trimming). Now we will use those mutiple sequence alignments in order to generate new reference libraries and assemble the clean reads:
 
 ``` 
