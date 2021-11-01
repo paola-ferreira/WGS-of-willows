@@ -161,7 +161,7 @@ Alternatively you can download the software through its own website at http://mo
 ### #Before you start
 We used our Whole-genome sequencing data in order to propose a evolutionary hypothesis for the enigmatic genus Salix. To do this, we used the alignments from Wagner et al. 2020 as targets in our dataset. The wagner's dataset comprised 23,393 loci for 133 taxa.
 
-1) Download the DNA matrices and import in Geneious
+1) Download the DNA matrices and import to Geneious
 2) Select all alignments and create a consensus for every aligment by clicking on 
 ``` Tools -> Generate Sequencing Consensus ```
 4) Export all the consensus sequences (fasta format) to a folder in your computer
