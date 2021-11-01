@@ -261,7 +261,7 @@ secapr quality_check --input /storage/plzen1/home/paolaferreira/1.raw_data --out
 
 #### 2) Assembling contigs
 After checking the quality (and/or cleaning and trimming the reads) we are now ready to use the fastq-reads for de-novo contig assembly. In this step the overlap between fastq reads is being used to build long, uninterrupted sequences, with no a priori knowledge of the correct sequence or order of those fragments. We will use the contigs to hopefully find the target regions that were selected for during sequence capture.
-For our willows project we used the development version of SECAPR which includes the ABYSS assembler. This is a much faster program compared to ABySS and Trinity (mostly used for transcriptome analysis) and also allows you to test several k-mer sizes at once. But first create a folder for each sample follow by ____clean___  and transfer both fastaq to there. This is necessary since we skipped the cleaning step, otherwise SECAPR would create a folder like that to you.
+For our willows project we used the development version of SECAPR which includes the SPADES assembler. This is a much faster program compared to ABySS and Trinity (mostly used for transcriptome analysis) and also allows you to test several k-mer sizes at once. But first create a folder for each sample follow by ____clean___  and transfer both fastaq to there. This is necessary since we skipped the cleaning step, otherwise SECAPR would create a folder like that to you.
 We ran our assemble using: 
 
 ``` 
