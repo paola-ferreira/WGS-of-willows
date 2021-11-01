@@ -278,7 +278,7 @@ Figure 1: Illustration of the mapping process. The input consists of a set of re
 We mapped our contigs using the following commands:
 
 ``` 
-secapr find_target_contigs --contigs /storage/plzen1/home/paolaferreira/3.assembling  --output /storage/plzen1/home/paolaferreira/4.mapping --reference /storage/plzen1/home/paolaferreira/0.reference 
+secapr find_target_contigs --contigs /storage/plzen1/home/paolaferreira/3.assembling  --output /storage/plzen1/home/paolaferreira/4.mapping --reference /storage/plzen1/home/paolaferreira/0.reference/reference.fasta 
 ``` 
 
 #### 4) Alignment
@@ -291,7 +291,7 @@ secapr align_sequences --sequences /storage/plzen1/home/paolaferreira/4.mapping/
 #### 5) Trimming
 Once we get our multiple sequence alignments usually we need to remove poor aligned and divergent regions that may not be homologous or satured by multiple substitutions.
 
-Go to the folder where your aligments are and create a loop in bash using default parameters:
+Go to the folder where your aligments are and create a loop in bash using default parameters in Gblocks:
 
 ``` 
 for i in *fasta; do Gblocks ${i} -t=y -p=y; done
@@ -304,22 +304,38 @@ your_file_alignment.fasta-gb.htm - This file comprises the trimming statistics f
 Let's create a new folder and move the cleaned alignments:
 
 ``` 
+paolaferreira@skirit:/storage/plzen1/home/paolaferreira$ cd ../
 paolaferreira@skirit:/storage/plzen1/home/paolaferreira$ mkdir 6.cleaned_alignments
 mv *gb ../6.cleaned_alignments
 ``` 
 
 #### 6) Mapping
-Usually an analysis of most NGS datasets comprises the previous steps that we have gone through (cleaning and trimming of the reads, de-novo assembly of contigs, mapping, multiple sequence alignments and trimming). Now we will use those mutiple sequence alignments in order to generate new reference libraries and assemble the clean reads:
+Usually an analysis of most NGS datasets comprises only one step approach and performing the previous steps that we have gone through (cleaning and trimming of the reads, de-novo assembly of contigs, mapping, multiple sequence alignments and trimming). However, the sequence targets used during the mapping were based on 23,393 alignments from a RADseq study (Wagner et al., 2020) which were only ~80 base pair long. These short reference targets could cause some bias during the mapping and mislead the phylogenies. In order to overcome these challenges we generated new sequence targets from our trimmed alignments. Now, our new sequence targets are reference is on average of 2800 base pair long and should be appropriated to infer a phylogenetic hypothesis. We ran our mapping using:
 
 ``` 
 secapr reference_assembly --reads /storage/plzen1/home/paolaferreira/1.raw_data --reference_type alignment-consensus --reference /storage/plzen1/home/paolaferreira/6.cleaned_alignments --output /storage/plzen1/home/paolaferreira/8.reference_based_mapping --cores 16 --min_coverage 4
 ``` 
 
+#### 5) Trimming
+Multiple sequence alignments were again trimmed to remove poor aligned and divergent regions.
 
+Go to the folder where your aligments are and create a loop in bash using default parameters in Gblocks:
 
+``` 
+for i in *fasta; do Gblocks ${i} -t=y -p=y; done
+``` 
 
+Create a new folder and move the cleaned alignments:
 
+``` 
+paolaferreira@skirit:/storage/plzen1/home/paolaferreira$ cd ../
+paolaferreira@skirit:/storage/plzen1/home/paolaferreira$ mkdir 9.cleaned_alignments
+mv *gb ../9.cleaned_alignments
+``` 
 
+#### 1) Phylogenetic hypothesis 
+Now we have our clean alignments ready to infer a phylogeny. For this study we import all the alignments to Geneious and only select those which were larger than ≥500 bp long and comprises ≥ four taxa. 
+We ran our phylogenies using IQTREE version 2.1.2 (Minh et al., 2020), and ASTRAL-III (Zhang et al., 2018).
 
 
 #### References:
@@ -327,7 +343,11 @@ Andermann, T., Cano, Á., Zizka, A., Bacon, C., & Antonelli, A. (2018). SECAPR-a
 
 Castresana, J. (2000). Selection of conserved blocks from multiple alignments for their use in phylogenetic analysis. Molecular Biology and Evolution 17, 540-552. https://doi.org/10.1093/oxfordjournals.molbev.a026334 
 
+Minh, B.Q., Schmidt, H.A., Chernomor, O., Schrempf, D., Woodhams, M.D., von Haeseler, A., Lanfear, R. 2020. IQ-TREE 2: New models and efficient methods for phylogenetic inference in the genomic era. Mol. Biol. Evol., 37, 1530-1534. https://doi.org/10.1093/molbev/msaa015
+
 Talavera, G., and Castresana, J. (2007). Improvement of phylogenies after removing divergent and ambiguously aligned blocks from protein sequence alignments. Systematic Biology 56, 564-577. https://doi.org/10.1080/10635150701472164
+
+Zhang, C., Rabiee, M., Sayyari, E., Mirarab, S., 2018. ASTRAL-III: polynomial time species tree reconstruction from partially resolved gene trees. BMC Bioinformatics 19, 153. https://doi.org/10.1186/s12859-018-2129-y 
 
 Wagner, N. D., He, L., & Hörandl, E. (2020). Phylogenomic Relationships and Evolution of Polyploid Salix Species Revealed by RAD Sequencing Data. Frontiers in plant science, 11, 1077. https://doi.org/10.3389/fpls.2020.01077 
 
