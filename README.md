@@ -1,5 +1,5 @@
 # Whole-genome sequencing data of Willows
-This is a step-by-step tutorial how it was analyzed the WGS data of willows from Illumina sequencing. Please notice that all analyses must be run in a cluster due to the amount of data generated.
+This is a step-by-step tutorial how it was analyzed the WGS data of willows from Illumina sequencing. Please notice that all analyses were run in a cluster due to the amount of data generated.
 This tutorial is supposed to be friendly-user but I will be delight to answer any questions.
 
 ### #Installation and Setup
