@@ -269,7 +269,7 @@ secapr assemble_reads --input /storage/plzen1/home/paolaferreira/1.raw_data  --o
 ``` 
 
 #### 3) Mapping
-Mapping is the process to align contigs (or reads) obtained by through high-throughput genome sequencing to a reference (genome, genes, cds, etc). To do this we will be using the consensus sequence from the multiple sequence alignment uploaded in the __before you start section.  
+Mapping is the process to align contigs (or reads) obtained by through high-throughput genome sequencing to a reference (genome, genes, cds, etc). To do this we will be using the consensus sequence from the multiple sequence alignment uploaded previously.  
 
 ![image](https://user-images.githubusercontent.com/88035938/130071327-a8ebf5eb-8239-4309-b9cd-6277f53caf98.png)
 
