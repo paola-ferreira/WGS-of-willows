@@ -333,7 +333,7 @@ paolaferreira@skirit:/storage/plzen1/home/paolaferreira$ mkdir 9.cleaned_alignme
 mv *gb ../9.cleaned_alignments
 ``` 
 
-#### 1) Phylogenetic hypothesis 
+#### #Phylogenetic hypothesis 
 Now we have our clean alignments ready to infer a phylogeny. For this study we import all the alignments to Geneious and only select those which were larger than ≥500 bp long and comprises ≥ four taxa. 
 We ran our phylogenies using IQTREE version 2.1.2 (Minh et al., 2020), and ASTRAL-III (Zhang et al., 2018).
 
