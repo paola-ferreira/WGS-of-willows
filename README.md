@@ -138,6 +138,20 @@ Check the version installed
 secapr --version
 ``` 
 
+SECAPR version 2.0.2 uses an upadted version of Biophyton in which the Bio.alphabet is removed. Therefore, when we will have an error when doing the alignments saying that Bioalphabet is not installed. In order to have our alignments running we need to downgrade our version of Biopython.
+
+First activate the SECAPR pipeline:
+
+```
+source activate secapr_env
+```
+
+Second downgrade the Biopython version to 1.77
+
+```
+conda install biopython==1.77
+```
+
 #### 2. Install Gblocks
 Gblocks is a software that eliminates poorly aligned positions and divergent regions of DNA or protein sequence allignments (Castresana, 2000; Talavera & Castresana, 2007).
 
