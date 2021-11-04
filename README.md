@@ -138,7 +138,7 @@ Check the version installed
 secapr --version
 ``` 
 
-SECAPR version 2.0.2 uses an upadted version of Biophyton in which the Bio.alphabet is removed. Therefore, when we will have an error when doing the alignments saying that Bioalphabet is not installed. In order to have our alignments running we need to downgrade our version of Biopython.
+SECAPR version 2.0.2 uses an updated version of Biophyton in which the Bio.alphabet is removed. Therefore, when we will have an error when doing the alignments saying that Bioalphabet is not installed. In order to have our alignments running we need to downgrade our version of Biopython.
 
 First activate the SECAPR pipeline:
 
