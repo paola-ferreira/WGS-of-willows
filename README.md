@@ -349,7 +349,7 @@ mv *gb ../9.cleaned_alignments
 
 #### #Phylogenetic hypothesis 
 Now, we have our clean alignments ready to infer a phylogeny. For this study we import all the alignments to Geneious and only select those which were larger than ≥500 bp long and comprises ≥ four taxa. 
-We ran our phylogenies using IQTREE version 2.1.2 (Minh et al., 2020), and ASTRAL-III (Zhang et al., 2018).
+We ran our phylogenies using IQTREE version 2.1.2 (Minh et al., 2020).
 
 
 #### References:
@@ -360,8 +360,6 @@ Castresana, J. (2000). Selection of conserved blocks from multiple alignments fo
 Minh, B.Q., Schmidt, H.A., Chernomor, O., Schrempf, D., Woodhams, M.D., von Haeseler, A., Lanfear, R. 2020. IQ-TREE 2: New models and efficient methods for phylogenetic inference in the genomic era. Mol. Biol. Evol., 37, 1530-1534. https://doi.org/10.1093/molbev/msaa015
 
 Talavera, G., and Castresana, J. (2007). Improvement of phylogenies after removing divergent and ambiguously aligned blocks from protein sequence alignments. Systematic Biology 56, 564-577. https://doi.org/10.1080/10635150701472164
-
-Zhang, C., Rabiee, M., Sayyari, E., Mirarab, S., 2018. ASTRAL-III: polynomial time species tree reconstruction from partially resolved gene trees. BMC Bioinformatics 19, 153. https://doi.org/10.1186/s12859-018-2129-y 
 
 Wagner, N. D., He, L., & Hörandl, E. (2020). Phylogenomic Relationships and Evolution of Polyploid Salix Species Revealed by RAD Sequencing Data. Frontiers in plant science, 11, 1077. https://doi.org/10.3389/fpls.2020.01077 
 
