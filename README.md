@@ -261,6 +261,8 @@ Our pipeline comprises of two main approaches. First, the clean reads were de no
 
 ![Supplementary Figure 1](https://user-images.githubusercontent.com/88035938/139684955-83b0e9a9-789a-41d4-9828-4482ef5ca0d4.png)
 ![bitmap](https://user-images.githubusercontent.com/88035938/231794579-b27f2b2a-b2cd-4a9f-acc6-6ef1a0b1e601.png)
+![Picture1](https://user-images.githubusercontent.com/88035938/231795787-a1ba363a-0467-435c-afb0-8912526b8811.png)
+
 
 Supplementary Figure 1. Phylogenomics workflow.
 
