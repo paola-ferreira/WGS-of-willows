@@ -259,11 +259,7 @@ Second rename your files: A simple sample ID is enough followed by _R1 for the f
 #### #Data Analysis 
 Our pipeline comprises of two main approaches. First, the clean reads were de novo assembled into contigs and mapped against the consensus alignment of 23,393 loci from Wagner et al. (2020). Target-enriched loci were aligned, trimmed and submitted to a new alignment consensus. Second, the consensus alignment was mapped against the clean reads. Multiple sequence alignments for each loci was performed which included 4 or more taxa and larger than 500 base pairs, and trimming unambiguous aligned regions. The resulting matrices used in downstream phylogenetic analyses using concatenation (IQtree), and coalescent approach (ASTRAL-III).
 
-![Supplementary Figure 1](https://user-images.githubusercontent.com/88035938/139684955-83b0e9a9-789a-41d4-9828-4482ef5ca0d4.png)
-![bitmap](https://user-images.githubusercontent.com/88035938/231794579-b27f2b2a-b2cd-4a9f-acc6-6ef1a0b1e601.png)
 ![Picture1](https://user-images.githubusercontent.com/88035938/231796173-e2c8d5c2-9ec0-4628-9ea2-07cc3cd109c3.png)
-
-
 Supplementary Figure 1. Phylogenomics workflow.
 
 #### 1) Quality Check your raw reads
